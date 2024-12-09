@@ -14,5 +14,12 @@ class Post extends Model
      *
      * @var array<string>
      */
-    protected $fillable = ['title', 'body', 'image', 'published_at'];
+    protected $fillable = ['title', 'body', 'image', 'published_at', 'category_id'];
+
+
+    
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
 }
