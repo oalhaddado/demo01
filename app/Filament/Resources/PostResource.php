@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\PostResource\Pages;
 use App\Filament\Resources\PostResource\RelationManagers;
+use App\Models\Category;
 use App\Models\Post;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -28,6 +29,9 @@ class PostResource extends Resource
                     ->maxLength(255),
                 Forms\Components\DatePicker::make('published_at')
                     ->required(),
+                Forms\Components\Select::make('category_id')
+                    ->required()
+                    ->relationship(name: 'category', titleAttribute: 'name'),
                 Forms\Components\Textarea::make('body')
                     ->required()
                     ->maxLength(65535)
@@ -44,6 +48,7 @@ class PostResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('title')
                     ->searchable(),
+                Tables\Columns\TextColumn::make('category.name'),
                 Tables\Columns\TextColumn::make('published_at')
                     ->date()
                     ->sortable(),
